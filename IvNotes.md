@@ -24,4 +24,34 @@ Here are a few items of note:
 2. The regressors $X_1$ satisfy exogeneity and, as such, are included in $Z$. We write $Z = (Z_1, Z_2) = (X_1,Z_2)$. The $X_1$ are the **included exogenous variables** and have dimension $k_1$. $Z_2$ are the **excluded exogenous variables** and have dimension $l_2$.
 3. The **exclusion restriction** is given by the first condition.
 4. The model is **just identified** if $l=k$ and **over-identified** if $l\geq k$.
-# Notation
+
+# The Reduced Form
+If we project the endogenous variables onto the instrument $Z$, we will have an $l\times k_2$ matrix of projection coefficients,
+$$\Gamma \equiv \mathbb{E}(ZZ')^{-1}\mathbb{E}(ZX'_2)$$
+There are two  **reduced form** equations. One describes the relationship between the endogenous variables and the instruments
+$$X_2 = \Gamma'Z + u_2 = \Gamma'_{12}Z_1 + \Gamma'_{22}Z_2 + u_2$$
+The other plugs this one into the structural equation yielding
+$$
+Y_1 = Z'_1\beta_1 + (\Gamma'_{12}Z_1 + \Gamma_{22}Z_2 + u_2)'\beta_2 + e
+$$
+Defining
+$$\begin{align*}
+\lambda_1 &= \beta_1 + \Gamma_{12}\beta_2\\
+\lambda_2 &= \Gamma_{22}\beta_2\\
+u_1 &= u'_2\beta_2 + e
+\end{align*}$$
+The above equation is more compactly written
+$$Y_1 = Z'\lambda + u_1$$
+where $\lambda = [\lambda_1, \lambda_2]'$ is an $l\times1$ vector. The equations defining $\lambda_1,\lambda_2$ suggest that
+$$\lambda = \bar\Gamma\beta$$
+where
+$$\bar\Gamma = 
+\begin{bmatrix}
+\textbf{I}_{k_1} && \Gamma_{12}\\
+0 && \Gamma_{22}
+\end{bmatrix}
+$$
+All together the **Reduced Form System** is
+> $$Y_1 = \lambda'Z+ u_1$$
+> $$X_2 = \Gamma'Z + u_2$$
+Estimators for these reduced form equations are given in chapters 11 and 12 of Hansen's *Econometrics*.
